@@ -1,6 +1,11 @@
 # vue-laravel-images
 
-A simply practice Gallery maked with VueJS and Laravel 8 (API Rest).
+A simply practice Gallery maked with VueJS and Rails 6 (API Rest).
+
+## Changes
+
+The only diffrence with the Laravel version is the is the response for index of images
+and the form data (the request) for send a new image to the API (maked in Rails 6 in this case)
 
 ## Project setup
 ```
