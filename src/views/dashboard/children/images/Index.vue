@@ -1,15 +1,5 @@
 <template>
   <div id="images-index">
-      <section class="hero is-small is-primary">
-          <div class="hero-body">
-              <div class="title">
-                  Vue Gallery
-              </div>
-              <p class="subtitle">
-                  A Practice Gallery With VueJS + Rails 6
-              </p>
-          </div>
-      </section>
       <div class="content is-large is-inline-flex mt-6 ml-5">
         <h1 class="title is-2">Images</h1>
         <NewImage />
@@ -21,7 +11,6 @@
           <h1 class="title is-3">Image(s) not found(s)</h1>
       </div>
       <Pagination :amount="images.length"/>
-       <FlashMessage :position="'right bottom'"/>
   </div>
 </template>
 
