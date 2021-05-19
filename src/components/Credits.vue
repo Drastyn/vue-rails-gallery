@@ -1,7 +1,7 @@
 <template>
   <div id="credits">
     <p class="subtitle">
-      A Practice Gallery With VueJS + Laravel 8.
+      A Practice Gallery With VueJS + Rails 6.
       Developed By 
       <a class="credits-link" href="https://github.com/Drastyn"> 
         <span>Drastyn</span>   
