@@ -1,4 +1,4 @@
-# vue-laravel-images
+# vue-rails-images
 
 A simply practice Gallery maked with VueJS and Rails 6 (API Rest).
 
