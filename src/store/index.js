@@ -5,7 +5,6 @@ import createPersistedState from "vuex-persistedstate";
 import LoginLogic from '../logic/login';
 
 import images from './modules/images';
-import pagination from './modules/pagination';
 import forms from './modules/forms';
 import notifications from './modules/notifications';
 
@@ -49,7 +48,6 @@ const store = new Vuex.Store({
   },
   modules: {
     images: images,
-    pagination: pagination,
     forms: forms,
     notifications: notifications,
   },

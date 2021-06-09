@@ -1,12 +1,11 @@
 <template>
   <div id="credits">
     <p class="subtitle">
-      A Practice Gallery With VueJS + Rails 6.
-      Developed By 
-      <a class="credits-link" href="https://github.com/Drastyn"> 
-        <span>Drastyn</span>   
+      A Practice Gallery With VueJS + Rails 6. Developed By
+      <a class="credits-link" href="https://github.com/Drastyn">
+        <span>Drastyn</span>
         <span class="ml-1">
-          <font-awesome-icon :icon="['fab', 'github']"/>
+          <font-awesome-icon :icon="['fab', 'github']" />
         </span>
       </a>
     </p>
@@ -15,6 +14,6 @@
 
 <script>
 export default {
-    name: 'credits',
-}
+  name: "credits",
+};
 </script>

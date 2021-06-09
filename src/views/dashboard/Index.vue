@@ -32,7 +32,7 @@ export default {
       GalleryFooter,
       Credits,
     },
-        computed: {
+    computed: {
         ...mapState('notifications', ['notification']),
     },
     methods: {

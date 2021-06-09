@@ -39,7 +39,7 @@
         </div>
       </div>
     </div>
-    <FlashMessage :position="'right bottom'"/>
+    <FlashMessage :position="'right bottom'" />
   </div>
 </template>
 
@@ -53,25 +53,26 @@ export default {
     };
   },
   computed: {
-    ...mapState('notifications', ['notification']),
+    ...mapState("notifications", ["notification"]),
   },
   destroyed() {
-    this.$store.dispatch('notifications/cleanNotification');
+    this.$store.dispatch("notifications/cleanNotification");
   },
   methods: {
-    display(message) { 
-      this.$store.dispatch('notifications/loginMessage', message);
-      this.flashMessage.show(this.notification); 
+    display(message) {
+      this.$store.dispatch("notifications/loginMessage", message);
+      this.flashMessage.show(this.notification);
     },
     login() {
-      this.$store.dispatch('doLogin', this.user)
-      .then((response) => {
-        this.display('You have successfully logged in');
-        this.$router.push({ name: response.path });
-      })
-      .catch(() => {
-        this.display('Invalid credentials, retry again please');
-      });
+      this.$store
+        .dispatch("doLogin", this.user)
+        .then((response) => {
+          this.display("You have successfully logged in");
+          this.$router.push({ name: response.path });
+        })
+        .catch(() => {
+          this.display("Invalid credentials, retry again please");
+        });
     },
   },
 };

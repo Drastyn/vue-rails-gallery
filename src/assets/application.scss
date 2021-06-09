@@ -1,75 +1,96 @@
-@import '~bulma';
+@import "~bulma";
 
-.pointer { cursor: pointer; }
+.pointer {
+  cursor: pointer;
+}
 
-.credits { display: none; }
+.credits {
+  display: none;
+}
 
-.flash-message-text { margin-top: 2.5rem; }
+.flash-message-text {
+  margin-top: 2.5rem;
+}
 
-.page-button { background: #00d1b2; }
+.page-button {
+  background: #00d1b2;
+}
 
-.nav-button, .nav-button:hover {
-    border: none;
-    color: white;
+.nav-button,
+.nav-button:hover {
+  border: none;
+  color: white;
 }
 
 .page-number {
-    color: black;
-    border: none;
-    cursor: default;
+  color: black;
+  border: none;
+  cursor: default;
 }
 
 .modal {
-    animation: animation_open 1s;
-    &-center {
-        margin: 70% auto;
-        overflow: hidden;
-    }
+  animation: animation_open 1s;
+  &-center {
+    margin: 70% auto;
+    overflow: hidden;
+  }
 }
 
 @keyframes animation_open {
-    from {opacity: 0;}
-    to {opacity: 1;}
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .preview {
-    display: flex;
-    justify-content: center;
-    &-image { border-radius: 0.25rem; }
+  display: flex;
+  justify-content: center;
+  &-image {
+    border-radius: 0.25rem;
+  }
 }
 
 /* Tablet */
 @media screen and (min-width: 768px) {
-    .modal {
-        &-center { margin: 25% auto; }
+  .modal {
+    &-center {
+      margin: 25% auto;
     }
+  }
 }
 
 @media screen and (min-width: 1024px) {
-    .modal {
-        &-center { margin: 15% auto; }
+  .modal {
+    &-center {
+      margin: 15% auto;
     }
-    .credits { 
-        display: block;
-        &-link{ transition: .8s; }
-        &-link:hover { color: #3e73dc !important; }
+  }
+  .credits {
+    display: block;
+    &-link {
+      transition: 0.8s;
     }
-    .fix-footer {
-        display: none;
-        /*position: absolute;
-        width: 100%;
-        bottom: 0;
-        overflow:hidden;*/
+    &-link:hover {
+      color: #3e73dc !important;
     }
+  }
+  .fix-footer {
+    display: none;
+  }
 }
 
 /* Escritorio */
 @media screen and (min-width: 1400px) {
-    .modal {
-        &-center { margin: 5% auto; }
-        &-content {
-            width: 1280px;  
-            height: 720px;
-        }
+  .modal {
+    &-center {
+      margin: 5% auto;
     }
+    &-content {
+      width: 1280px;
+      height: 720px;
+    }
+  }
 }

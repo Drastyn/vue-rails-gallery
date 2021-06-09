@@ -7,11 +7,11 @@
 </template>
 
 <script>
-import Credits from './Credits';
+import Credits from "./Credits";
 export default {
-    name: 'gallery-footer',
-    components: {
-      Credits,
-    }
-}
+  name: "gallery-footer",
+  components: {
+    Credits,
+  },
+};
 </script>
