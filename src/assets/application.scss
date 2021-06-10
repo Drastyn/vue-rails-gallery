@@ -8,6 +8,16 @@
   display: none;
 }
 
+.my-bar {
+  display: flex;
+  flex-wrap: wrap;
+
+  a {
+    width: 90%;
+    margin-bottom: 10px;
+  }
+}
+
 .flash-message-text {
   margin-top: 2.5rem;
 }
@@ -60,6 +70,14 @@
       margin: 25% auto;
     }
   }
+  .my-bar {
+    flex-wrap: nowrap;
+
+    a {
+      width: 20%;
+      margin-bottom: 0px;
+    }
+  }
 }
 
 @media screen and (min-width: 1024px) {
@@ -91,6 +109,11 @@
     &-content {
       width: 1280px;
       height: 720px;
+    }
+  }
+  .my-bar {
+    a {
+      width: 10%;
     }
   }
 }

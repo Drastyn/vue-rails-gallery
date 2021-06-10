@@ -36,18 +36,32 @@ const images = {
     },
   },
   actions: {
-    getImages({ commit, rootState, state }, params) {
+    getImages({ commit, rootState, state, dispatch }, params) {
       commit("setHeaders", rootState);
       return new Promise((resolve, reject) => {
         ImagesLogic.fetchImages(params, state.headers)
           .then((response) => {
-            commit("setImages", response.data);
-            commit("setNextPage", response.next_page_url);
-            commit("setPrevPage", response.prev_page_url);
+            dispatch("setData", response);
             resolve(response);
           })
           .catch((error) => reject(error));
       });
+    },
+    searchImages({ commit, rootState, state, dispatch }, params) {
+      commit("setHeaders", rootState);
+      return new Promise((resolve, reject) => {
+        ImagesLogic.search(params, state.headers)
+          .then((response) => {
+            dispatch("setData", response);
+            resolve(response);
+          })
+          .catch((error) => reject(error));
+      });
+    },
+    setData({ commit }, response) {
+      commit("setImages", response.data);
+      commit("setNextPage", response.next_page_url);
+      commit("setPrevPage", response.prev_page_url);
     },
     getImage({ commit, rootState, state }, token) {
       commit("setHeaders", rootState);

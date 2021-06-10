@@ -11,6 +11,18 @@ export default {
       .then((response) => response.data)
       .catch((error) => console.log(error));
   },
+  search(params, headers) {
+    return petition({
+      method: "post",
+      url: `images?page=${params.page}`,
+      headers: headers,
+      data: {
+        search: params.search,
+      },
+    })
+      .then((response) => response.data)
+      .catch((error) => console.log(error));
+  },
   get(token, headers) {
     return petition
       .get(`images/${token}`, { headers: headers })
