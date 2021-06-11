@@ -59,7 +59,7 @@ const images = {
       });
     },
     setData({ commit }, response) {
-      commit("setImages", response.data);
+      commit("setImages", response.images);
       commit("setNextPage", response.next_page_url);
       commit("setPrevPage", response.prev_page_url);
     },
