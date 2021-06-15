@@ -10,7 +10,7 @@
                 <div class="control">
                   <input
                     type="text"
-                    v-model="user.name"
+                    v-model="name"
                     class="input"
                     placeholder="Username"
                     autofocus
@@ -20,7 +20,7 @@
                   <div class="control">
                     <input
                       type="password"
-                      v-model="user.password"
+                      v-model="password"
                       class="input"
                       placeholder="Password"
                     />
@@ -49,7 +49,8 @@ export default {
   name: "Login",
   data() {
     return {
-      user: {},
+      name: null,
+      password: null,
     };
   },
   computed: {
@@ -64,15 +65,21 @@ export default {
       this.flashMessage.show(this.notification);
     },
     login() {
-      this.$store
-        .dispatch("doLogin", this.user)
-        .then((response) => {
-          this.display("You have successfully logged in");
-          this.$router.push({ name: response.path });
-        })
-        .catch(() => {
-          this.display("Invalid credentials, retry again please");
-        });
+      if (this.name && this.password) {
+        this.user = {
+          name: this.name,
+          password: this.password,
+        };
+        this.$store
+          .dispatch("doLogin", this.user)
+          .then((response) => {
+            this.display("You have successfully logged in");
+            this.$router.push({ name: response.path });
+          })
+          .catch(() => {
+            this.display("Invalid credentials, retry again please");
+          });
+      }
     },
   },
 };
