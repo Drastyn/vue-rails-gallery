@@ -10,26 +10,7 @@
           <font-awesome-icon icon="plus" />
         </span>
       </router-link>
-      <div class="field has-addons ml-2 mr-5">
-        <div class="control">
-          <input
-            type="text"
-            class="input is-primary"
-            placeholder="Search by name..."
-            v-model="searchInput"
-          />
-        </div>
-        <button class="button is-primary" @click="makeSearch()">
-          <span class="icon">
-            <font-awesome-icon icon="search" />
-          </span>
-        </button>
-        <button v-if="isSearch" class="button is-info ml-3" @click="refresh()">
-          <span class="icon">
-            <font-awesome-icon icon="sync" />
-          </span>
-        </button>
-      </div>
+      <Browser :makeSearch="makeSearch" :requestImages="requestImages" />
     </div>
     <div class="columns is-multiline mx-3">
       <div v-if="images.length < 1" class="mt-5 mx-3">
@@ -40,24 +21,7 @@
         v-for="(image, index) in images"
         :key="index"
       >
-        <div class="card pointer" @click="openModal(image.url)">
-          <div class="card-image">
-            <figure class="image is-16by9">
-              <img :src="image.url" :alt="image.name" />
-            </figure>
-          </div>
-          <div class="card-content is-overlay is-clipped">
-            <router-link
-              class="button is-small is-info"
-              :to="{ name: 'show_image_path', params: { token: image.token } }"
-            >
-              <span>{{ image.name }}</span>
-              <span class="icon">
-                <font-awesome-icon icon="link" />
-              </span>
-            </router-link>
-          </div>
-        </div>
+        <Card :image="image" />
       </div>
     </div>
     <div id="modal" class="modal">
@@ -101,23 +65,19 @@
 
 <script>
 import { mapState } from "vuex";
+import Card from "@/components/Card";
+import Browser from "@/components/Browser";
 export default {
   name: "images-index",
-  data() {
-    return {
-      modal: "",
-      modalBackground: "",
-      imageModal: "",
-      searchInput: null,
-      isSearch: false,
-    };
+  components: {
+    Card,
+    Browser,
   },
   computed: {
     ...mapState("images", ["images", "nextPage", "prevPage"]),
   },
   mounted() {
     this.requestImages();
-    this.closeModal();
   },
   destroyed() {
     this.$store.dispatch("images/cleanImages");
@@ -128,33 +88,10 @@ export default {
         page: 1,
       });
     },
-    makeSearch() {
-      if (this.searchInput) {
-        this.$store.dispatch("images/searchImages", {
-          page: 1,
-          search: this.searchInput,
-        });
-        this.isSearch = true;
-      }
-    },
-    refresh() {
-      this.requestImages();
-      this.searchInput = null;
-      this.isSearch = false;
-    },
-    openModal(imageUrl) {
-      this.modal.style.display = "block";
-      this.imageModal.src = imageUrl;
-    },
-    closeModal() {
-      this.modal = document.getElementById("modal");
-      this.modalBackground = document.getElementById("modal-background");
-      this.imageModal = document.getElementById("image-modal");
-      window.addEventListener("click", (event) => {
-        if (event.target === this.modalBackground) {
-          this.imageModal.src = "";
-          this.modal.style.display = "none";
-        }
+    makeSearch(searchInput) {
+      this.$store.dispatch("images/searchImages", {
+        page: 1,
+        search: searchInput,
       });
     },
     goToPage(page) {
