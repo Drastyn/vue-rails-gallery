@@ -24,11 +24,11 @@
         <Card :image="image" />
       </div>
     </div>
-    <div id="modal" class="modal">
-      <div id="modal-background" class="modal-background"></div>
-      <div class="modal-content modal-center">
+    <div id="modal">
+      <div id="modal-background"></div>
+      <div class="modal-content">
         <p class="image is-3by3">
-          <img id="image-modal" alt="modal-image" />
+          <img id="image-modal" alt="image" class="is-hidden" />
         </p>
       </div>
     </div>

@@ -28,26 +28,42 @@ export default {
       modal: "",
       modalBackground: "",
       imageModal: "",
+      modalIsOpen: false,
     };
   },
   mounted() {
+    this.setModalValues();
     this.closeModal();
   },
   methods: {
-    closeModal() {
+    setModalValues() {
       this.modal = document.getElementById("modal");
       this.modalBackground = document.getElementById("modal-background");
       this.imageModal = document.getElementById("image-modal");
+    },
+    closeModal() {
       window.addEventListener("click", (event) => {
-        if (event.target === this.modalBackground) {
-          this.imageModal.src = "";
-          this.modal.style.display = "none";
+        if (this.modalIsOpen && event.target === this.modalBackground) {
+          this.modalIsOpen = false;
+          this.disableModalStyles();
         }
       });
     },
+    disableModalStyles() {
+      this.imageModal.src = "";
+      this.imageModal.classList.add("is-hidden");
+      this.modal.classList.remove("modal");
+      this.modalBackground.classList.remove("modal-background");
+    },
     openModal(imageUrl) {
-      this.modal.style.display = "block";
+      this.modalIsOpen = true;
+      this.enableModalStyles(imageUrl);
+    },
+    enableModalStyles(imageUrl) {
+      this.imageModal.classList.remove("is-hidden");
       this.imageModal.src = imageUrl;
+      this.modal.classList.add("modal");
+      this.modalBackground.classList.add("modal-background");
     },
   },
 };
