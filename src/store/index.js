@@ -1,49 +1,51 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from "vue";
+import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
 
-import LoginLogic from '../logic/login';
+import LoginLogic from "../logic/login";
 
-import images from './modules/images';
-import forms from './modules/forms';
-import notifications from './modules/notifications';
+import images from "./modules/images";
+import forms from "./modules/forms";
+import notifications from "./modules/notifications";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    headers: {},
-    token: null,
+    headers: null,
   },
   mutations: {
-    setToken(state, token) {
-      state.token = token;
-    },
-    removeToken(state) {
-      state.token = null;
-    },
-    setHeaders(state) {
+    setHeaders(state, token) {
       state.headers = {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': state.token,
-      }
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: token,
+      };
+    },
+    removeHeaders(state) {
+      state.headers = null;
     },
   },
   actions: {
-    doLogin({commit}, user) {
+    doLogin({ commit }, user) {
       return new Promise((resolve, reject) => {
         LoginLogic.post(user)
-        .then(response => {
-          commit('setToken', `Bearer ${response.auth_token}`);
-          resolve({ path: 'images_path' });
-        })
-        .catch(error => reject(error));
+          .then((response) => {
+            if (response) {
+              commit("setHeaders", `Bearer ${response.auth_token}`);
+              resolve({ path: "images_path" });
+            }
+          })
+          .catch((error) => reject(error));
       });
     },
     doLogOut({ commit }) {
-      commit('removeToken');
-      commit('setHeaders');
+      commit("removeHeaders");
+    },
+  },
+  getters: {
+    getHeaders(rootState) {
+      return rootState.headers;
     },
   },
   modules: {
@@ -53,10 +55,10 @@ const store = new Vuex.Store({
   },
   plugins: [
     createPersistedState({
-      paths: ['token'],
+      paths: ["headers"],
       storage: window.sessionStorage,
-    })
-  ]
-})
+    }),
+  ],
+});
 
 export default store;

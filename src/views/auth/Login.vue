@@ -56,10 +56,16 @@ export default {
   computed: {
     ...mapState("notifications", ["notification"]),
   },
+  mounted() {
+    this.removeVuexInStorage();
+  },
   destroyed() {
     this.$store.dispatch("notifications/cleanNotification");
   },
   methods: {
+    removeVuexInStorage() {
+      window.sessionStorage.removeItem("vuex");
+    },
     display(message) {
       this.$store.dispatch("notifications/loginMessage", message);
       this.flashMessage.show(this.notification);

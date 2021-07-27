@@ -9,13 +9,6 @@ const images = {
     prevPage: 0,
   },
   mutations: {
-    setHeaders(state, rootState) {
-      state.headers = {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: rootState.token,
-      };
-    },
     setImages(state, images) {
       state.images = images;
     },
@@ -36,10 +29,9 @@ const images = {
     },
   },
   actions: {
-    getImages({ commit, rootState, state, dispatch }, params) {
-      commit("setHeaders", rootState);
+    getImages({ dispatch, rootGetters }, params) {
       return new Promise((resolve, reject) => {
-        ImagesLogic.fetchImages(params, state.headers)
+        ImagesLogic.fetchImages(params, rootGetters.getHeaders)
           .then((response) => {
             dispatch("setData", response);
             resolve(response);
@@ -47,10 +39,9 @@ const images = {
           .catch((error) => reject(error));
       });
     },
-    searchImages({ commit, rootState, state, dispatch }, params) {
-      commit("setHeaders", rootState);
+    searchImages({ dispatch, rootGetters }, params) {
       return new Promise((resolve, reject) => {
-        ImagesLogic.search(params, state.headers)
+        ImagesLogic.search(params, rootGetters.getHeaders)
           .then((response) => {
             dispatch("setData", response);
             resolve(response);
@@ -63,10 +54,9 @@ const images = {
       commit("setNextPage", response.next_page_url);
       commit("setPrevPage", response.prev_page_url);
     },
-    getImage({ commit, rootState, state }, token) {
-      commit("setHeaders", rootState);
+    getImage({ commit, rootGetters }, token) {
       return new Promise((resolve, reject) => {
-        ImagesLogic.get(token, state.headers)
+        ImagesLogic.get(token, rootGetters.getHeaders)
           .then((response) => {
             commit("setImage", response);
             resolve(response);
@@ -74,10 +64,9 @@ const images = {
           .catch((error) => reject(error));
       });
     },
-    postImage({ commit, rootState, state }, image) {
-      commit("setHeaders", rootState);
+    postImage({ commit, rootGetters }, image) {
       return new Promise((resolve, reject) => {
-        ImagesLogic.post(image, state.headers)
+        ImagesLogic.post(image, rootGetters.getHeaders)
           .then((response) => {
             commit("setImage", response);
             resolve(response);
