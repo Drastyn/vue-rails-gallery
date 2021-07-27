@@ -31,10 +31,8 @@ const store = new Vuex.Store({
       return new Promise((resolve, reject) => {
         LoginLogic.post(user)
           .then((response) => {
-            if (response) {
-              commit("setHeaders", `Bearer ${response.auth_token}`);
-              resolve({ path: "images_path" });
-            }
+            commit("setHeaders", `Bearer ${response.auth_token}`);
+            resolve({ path: "images_path" });
           })
           .catch((error) => reject(error));
       });

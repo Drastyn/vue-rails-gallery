@@ -84,6 +84,7 @@ export default {
           })
           .catch(() => {
             this.display("Invalid credentials, retry again please");
+            this.removeVuexInStorage();
           });
       }
     },
