@@ -63,13 +63,6 @@ export default {
     this.$store.dispatch("notifications/cleanNotification");
   },
   methods: {
-    removeVuexInStorage() {
-      window.sessionStorage.removeItem("vuex");
-    },
-    display(message) {
-      this.$store.dispatch("notifications/loginMessage", message);
-      this.flashMessage.show(this.notification);
-    },
     login() {
       if (this.name && this.password) {
         this.user = {
@@ -79,14 +72,24 @@ export default {
         this.$store
           .dispatch("doLogin", this.user)
           .then((response) => {
-            this.display("You have successfully logged in");
+            this.display("successMessage", "You have successfully logged in");
             this.$router.push({ name: response.path });
           })
           .catch(() => {
-            this.display("Invalid credentials, retry again please");
+            this.display(
+              "errorMessage",
+              "Invalid credentials, retry again please"
+            );
             this.removeVuexInStorage();
           });
       }
+    },
+    display(messageFunction, message) {
+      this.$store.dispatch(`notifications/${messageFunction}`, message);
+      this.flashMessage.show(this.notification);
+    },
+    removeVuexInStorage() {
+      window.sessionStorage.removeItem("vuex");
     },
   },
 };

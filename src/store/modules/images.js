@@ -9,11 +9,11 @@ const images = {
     prevPage: 0,
   },
   mutations: {
-    setImages(state, images) {
-      state.images = images;
+    setImages(state, responseImages) {
+      state.images = responseImages;
     },
-    setImage(state, image) {
-      state.image = image;
+    setImage(state, responseImage) {
+      state.image = responseImage;
     },
     setNextPage(state, nextPage) {
       state.nextPage = nextPage;
