@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     display(message) {
-      this.$store.dispatch("notifications/loginMessage", message);
+      this.$store.dispatch("notifications/successMessage", message);
       this.flashMessage.show(this.notification);
     },
     logout() {

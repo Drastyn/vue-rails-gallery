@@ -42,7 +42,7 @@ export default {
       this.imageModal = document.getElementById("image-modal");
     },
     closeModal() {
-      window.addEventListener("click", (event) => {
+      document.addEventListener("click", (event) => {
         if (this.modalIsOpen && event.target === this.modalBackground) {
           this.modalIsOpen = false;
           this.disableModalStyles();
