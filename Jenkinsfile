@@ -5,7 +5,6 @@ pipeline {
     stage("build") {
       steps {
         echo 'Hello from build stage!'
-        sh 'eslint --init'
         sh 'npm i'
       }
     }
