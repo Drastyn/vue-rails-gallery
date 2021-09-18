@@ -2,21 +2,10 @@ pipeline {
   agent any 
   
   stages {
-    stage("build") {
+    stage("run") {
       steps {
-        echo 'Hello from build stage'  
-      }
-    }
-    
-    stage("test") {
-      steps {
-        echo 'Hello from test stage'
-      }
-    }
-    
-    stage("deploy") {
-      steps {
-        echo 'Hello from deploy stage'
+        echo 'Hello from run stage!'
+        sh 'npm run serve -- --port 4000'
       }
     }
   }
