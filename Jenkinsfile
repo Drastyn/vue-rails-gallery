@@ -8,10 +8,10 @@ pipeline {
         sh 'npm i'
       }
     }
-    stage("run") {
+    stage("scanner") {
       steps {
-        echo 'Hello from run stage!'
-        sh 'npm run serve -- --port 4000'
+        echo 'Hello from run scanner'
+        sh 'sonar-scanner'
       }
     }
   }
